@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Unsere Zeit</title>
+  <style>
+    body { font-family: 'Segoe UI'; text-align: center; padding-top: 5rem; background: #f0f8ff; }
+    h1 { font-size: 2rem; }
+    #timer { font-size: 3rem; margin-top: 2rem; color: #ff1493; }
+  </style>
+</head>
+<body>
+  <h1>Ich liebe dich schon seit:</h1>
+  <div id="timer">Lade...</div>
+
+  <script>
+    const start = new Date("2010-01-01T00:00:00");
+    function updateTimer() {
+      const now = new Date();
+      const diff = now - start;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+      document.getElementById('timer').textContent =
+        `${days} Tage, ${hours} Std, ${minutes} Min, ${seconds} Sek`;
+    }
+    setInterval(updateTimer, 1000);
+    updateTimer();
+  </script>
+</body>
+</html>
+
