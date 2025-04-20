@@ -1,252 +1,46 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Für meinen Papalein 💙</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Für meinen lieben Papa</title>
   <style>
     body {
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(to bottom, #c6f0ff, #f0f9ff);
-      font-family: 'Open Sans', sans-serif;
+      background: #fff5f8;
       text-align: center;
-      color: #333;
-      overflow-x: hidden;
-      position: relative;
-      transition: background 0.5s ease;
     }
-
-    h1 {
-      font-family: 'Pacifico', cursive;
-      font-size: 3rem;
-      margin-top: 50px;
-      color: #1e90ff;
-      animation: fadeIn 2s ease-in-out;
+    header, footer {
+      background: #ffb6c1;
+      padding: 1rem;
     }
-
-    p {
-      font-size: 1.2rem;
-      width: 80%;
-      max-width: 600px;
-      margin: 30px auto;
-      line-height: 1.6;
-      animation: slideUp 2s ease-in-out;
+    nav a {
+      margin: 1rem;
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
     }
-
-    .heart {
-      font-size: 2rem;
-      color: red;
-      animation: heartbeat 1.5s infinite;
-    }
-
-    .footer {
-      margin-top: 100px;
-      font-size: 0.9rem;
-      color: #777;
-    }
-
-    button {
-      background-color: #ff69b4;
-      border: none;
-      color: white;
-      padding: 15px 30px;
-      font-size: 1.2rem;
-      border-radius: 50px;
-      cursor: pointer;
-      margin: 10px;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
-    }
-
-    .signature {
-      font-family: 'Pacifico', cursive;
-      font-size: 1.5rem;
-      margin-top: 60px;
-      color: #e60073;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    .love-text {
-      font-size: 2rem;
-      font-family: 'Pacifico', cursive;
-      color: #e60073;
-      margin-top: 20px;
-      animation: floatUp 1.2s ease forwards;
-    }
-
-    .virtual-hug {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 192, 203, 0.5);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      font-size: 5rem;
-      z-index: 10;
-      animation: fadeIn 0.5s ease;
-    }
-
-    .heart-firework {
-      position: absolute;
-      font-size: 2rem;
-      animation: explode 1s forwards;
-    }
-
-    @keyframes explode {
-      0% { transform: scale(0); opacity: 1; }
-      100% { transform: scale(2); opacity: 0; }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes floatUp {
-      from { opacity: 0; transform: translateY(20px) scale(0.9); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-
-    .brief {
-      border: 2px dashed pink;
-      padding: 20px;
-      max-width: 600px;
-      margin: 40px auto;
-      font-style: italic;
-      white-space: nowrap;
-      overflow: hidden;
-      border-radius: 10px;
-      animation: typing 6s steps(60, end) forwards;
-    }
-
-    .giftbox {
-      font-size: 3rem;
-      cursor: pointer;
-      animation: pulse 2s infinite;
-      margin-top: 30px;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-
-    .heart-trail {
-      position: fixed;
-      font-size: 1.5rem;
-      animation: floatUp 1s ease-out forwards;
-      pointer-events: none;
+    main {
+      padding: 2rem;
     }
   </style>
 </head>
 <body>
-  <h1>Für meinen Papalein 💙</h1>
-  <p>
-    Lieber Papa,<br />
-    ich möchte dir einfach mal sagen, wie sehr ich dich liebe. 🥹<br />
-    Du bist immer für mich da – mein Held, mein Fels.<br />
-    <span class="heart">❤️</span>
-  </p>
-
-  <button onclick="triggerVirtualHug()">Papa drücken ❤️</button>
-  <button onclick="showKeks()">Papa-Keks 🍪</button>
-  <button onclick="toggleMood()">Stimmung wechseln 🌈</button>
-  <button onclick="startFirework(event)">Herz-Feuerwerk 🎆</button>
-  <button onclick="toggleNightMode()">Nachtmodus 🌙</button>
-
-  <div class="love-text" id="keksText"></div>
-  <div class="virtual-hug" id="hugScreen">🤗💞</div>
-  
-  <div class="brief">Lieber Papa, du bist mein Lieblingsmensch. Ich danke dir für alles, was du für mich tust – du bist mein Held! 💌</div>
-
-  <div class="giftbox" onclick="openGiftBox()">🎁</div>
-  <div class="love-text" id="giftMessage" style="display: none;">Du hast mein Herz ausgepackt! 💝</div>
-
-  <div class="signature">Dein Schatz – Tagwolf ✍️</div>
-
-  <script>
-    const sprueche = [
-      "Du bist der Beste!",
-      "Ich liebe deine Umarmungen!",
-      "Danke, dass du immer da bist!",
-      "Mit dir ist alles besser!",
-      "Mein Herz schlägt für dich, Papa! 💗"
-    ];
-
-    function showKeks() {
-      const keks = document.getElementById("keksText");
-      const zufall = sprueche[Math.floor(Math.random() * sprueche.length)];
-      keks.innerText = zufall;
-      keks.style.display = "block";
-    }
-
-    function triggerVirtualHug() {
-      const hug = document.getElementById("hugScreen");
-      hug.style.display = "flex";
-      setTimeout(() => hug.style.display = "none", 1500);
-    }
-
-    let happy = true;
-    function toggleMood() {
-      document.body.style.background = happy
-        ? "linear-gradient(to bottom, #ffe0f0, #fff0f9)"
-        : "linear-gradient(to bottom, #c6f0ff, #f0f9ff)";
-      happy = !happy;
-    }
-
-    function startFirework(e) {
-      for (let i = 0; i < 10; i++) {
-        const heart = document.createElement("div");
-        heart.className = "heart-firework";
-        heart.innerText = "💖";
-        document.body.appendChild(heart);
-        const x = e.clientX + (Math.random() - 0.5) * 200;
-        const y = e.clientY + (Math.random() - 0.5) * 200;
-        heart.style.left = `${x}px`;
-        heart.style.top = `${y}px`;
-        setTimeout(() => heart.remove(), 1000);
-      }
-    }
-
-    let night = false;
-    function toggleNightMode() {
-      document.body.style.background = night
-        ? "linear-gradient(to bottom, #c6f0ff, #f0f9ff)"
-        : "linear-gradient(to bottom, #0d1b2a, #1b263b)";
-      document.body.style.color = night ? "#333" : "#fff";
-      night = !night;
-    }
-
-    function openGiftBox() {
-      const gift = document.getElementById("giftMessage");
-      gift.style.display = "block";
-      gift.style.animation = "floatUp 1.5s ease forwards";
-    }
-
-    document.addEventListener("mousemove", function (e) {
-      const heart = document.createElement("div");
-      heart.className = "heart-trail";
-      heart.innerText = "💗";
-      document.body.appendChild(heart);
-      heart.style.left = `${e.clientX}px`;
-      heart.style.top = `${e.clientY}px`;
-      setTimeout(() => heart.remove(), 1000);
-    });
-  </script>
+  <header>
+    <h1>Für Papa ❤</h1>
+    <nav>
+      <a href="time.html">⏳ Timer</a>
+      <a href="stern.html">⭐ Stern für Papa</a>
+      <a href="gutenacht.html">🌙 Gute Nacht</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Willkommen auf deiner Seite, Papa!</h2>
+    <p>Hier findest du kleine Überraschungen voller Liebe.</p>
+  </main>
+  <footer>
+    <p>Mit ganz viel Liebe, dein Schatz 💖</p>
+  </footer>
 </body>
 </html>
