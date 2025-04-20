@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Papa-Keks ❤️</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Für Papa ❤️</h1>
+    <nav>
+      <a href="index.html">Start</a>
+      <a href="time.html">⏳ Timer</a>
+      <a href="stern.html">⭐ Stern</a>
+      <a href="gutenacht.html">🌙 Nacht</a>
+      <a href="keks.html">🍪 Keks</a>
+      <a href="umarmung.html">🤗 Umarmung</a>
+      <a href="signatur.html">🖊️ Signatur</a>
+      <a href="stimmung.html">🌈 Stimmung</a>
+      <a href="feuerwerk.html">🎆 Feuerwerk</a>
+      <a href="nachtmodus.html">🌌 Himmel</a>
+      <a href="wetter.html">☁️ Wetter</a>
+      <a href="geschenk.html">🎁 Geschenk</a>
+      <a href="brief.html">📜 Brief</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Klick auf den Keks für einen lieben Spruch 🍪</h2>
+    <button onclick="showKeks()">Keks drücken</button>
+    <p id="spruch" style="font-size: 1.5rem; margin-top: 1.5rem;"></p>
+  </main>
+
+  <footer>
+    <p>Mit ganz viel Liebe, dein Schatz 💖</p>
+  </footer>
+
+  <script>
+    const sprueche = [
+      "Du bist der Beste, Papa!",
+      "Ich liebe deine Umarmungen!",
+      "Danke, dass du immer für mich da bist!",
+      "Dein Lächeln macht meinen Tag besser ❤️",
+      "Ohne dich wäre ich nur halb so glücklich!",
+      "Dein Herz ist mein Zuhause 💖"
+    ];
+    function showKeks() {
+      const r = Math.floor(Math.random() * sprueche.length);
+      document.getElementById("spruch").textContent = sprueche[r];
+    }
+  </script>
+</body>
+</html>
