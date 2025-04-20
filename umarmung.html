@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Virtuelle Umarmung</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    #arms {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      display: none;
+      background: rgba(255, 0, 0, 0.5);
+      border-radius: 50%;
+      transition: all 1s;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Für Papa ❤️</h1>
+    <nav>
+      <a href="index.html">Start</a>
+      <a href="time.html">⏳ Timer</a>
+      <a href="stern.html">⭐ Stern</a>
+      <a href="gutenacht.html">🌙 Nacht</a>
+      <a href="keks.html">🍪 Keks</a>
+      <a href="umarmung.html">🤗 Umarmung</a>
+      <a href="signatur.html">🖊️ Signatur</a>
+      <a href="stimmung.html">🌈 Stimmung</a>
+      <a href="feuerwerk.html">🎆 Feuerwerk</a>
+      <a href="nachtmodus.html">🌌 Himmel</a>
+      <a href="wetter.html">☁️ Wetter</a>
+      <a href="geschenk.html">🎁 Geschenk</a>
+      <a href="brief.html">📜 Brief</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Virtuelle Umarmung für Papa 🤗</h2>
+    <button onclick="giveHug()">Umarmen</button>
+    <div id="arms"></div>
+  </main>
+
+  <footer>
+    <p>Mit ganz viel Liebe, dein Tagwolf 💖</p>
+  </footer>
+
+  <script>
+    function giveHug() {
+      const arms = document.getElementById("arms");
+      arms.style.display = "block";
+      setTimeout(() => {
+        arms.style.width = "0vw";
+        arms.style.height = "0vh";
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
