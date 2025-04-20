@@ -15,6 +15,7 @@
       color: #333;
       overflow-x: hidden;
       position: relative;
+      transition: background 0.5s ease;
     }
 
     h1 {
@@ -46,7 +47,7 @@
       color: #777;
     }
 
-    .hug-button {
+    button {
       background-color: #ff69b4;
       border: none;
       color: white;
@@ -54,39 +55,55 @@
       font-size: 1.2rem;
       border-radius: 50px;
       cursor: pointer;
-      margin-top: 30px;
+      margin: 10px;
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .hug-button:hover {
+    button:hover {
       transform: scale(1.05);
       box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
     }
 
-    .hug-button.animate {
-      animation: bounce 0.4s ease;
-    }
-
-    @keyframes bounce {
-      0%   { transform: scale(1); }
-      30%  { transform: scale(1.15); }
-      60%  { transform: scale(0.95); }
-      100% { transform: scale(1); }
-    }
-
-    .hug-message, .love-text {
-      display: none;
-      margin-top: 20px;
-      font-size: 1.2rem;
-      color: #ff1493;
-      animation: fadeIn 1s ease-in-out;
+    .signature {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.5rem;
+      margin-top: 60px;
+      color: #e60073;
+      animation: fadeIn 2s ease-in-out;
     }
 
     .love-text {
       font-size: 2rem;
       font-family: 'Pacifico', cursive;
       color: #e60073;
+      margin-top: 20px;
       animation: floatUp 1.2s ease forwards;
+    }
+
+    .virtual-hug {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 192, 203, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      font-size: 5rem;
+      z-index: 10;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .heart-firework {
+      position: absolute;
+      font-size: 2rem;
+      animation: explode 1s forwards;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(0); opacity: 1; }
+      100% { transform: scale(2); opacity: 0; }
     }
 
     @keyframes fadeIn {
@@ -99,118 +116,137 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    .floating-hearts {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
     }
 
-    .floating-hearts span {
-      position: absolute;
-      display: block;
-      color: rgba(255, 0, 0, 0.4);
-      animation: float 10s linear infinite;
-      font-size: 2rem;
+    .brief {
+      border: 2px dashed pink;
+      padding: 20px;
+      max-width: 600px;
+      margin: 40px auto;
+      font-style: italic;
+      white-space: nowrap;
+      overflow: hidden;
+      border-radius: 10px;
+      animation: typing 6s steps(60, end) forwards;
     }
 
-    @keyframes float {
-      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-      50% { opacity: 1; }
-      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-    }
-
-    /* Herz-Explosion */
-    .explosion {
-      position: absolute;
-      pointer-events: none;
-      animation: explode 1s forwards;
-      font-size: 2rem;
-    }
-
-    @keyframes explode {
-      0% { transform: scale(0); opacity: 1; }
-      100% { transform: scale(2); opacity: 0; }
-    }
-
-    audio {
+    .giftbox {
+      font-size: 3rem;
+      cursor: pointer;
+      animation: pulse 2s infinite;
       margin-top: 30px;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .heart-trail {
+      position: fixed;
+      font-size: 1.5rem;
+      animation: floatUp 1s ease-out forwards;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
-  <div class="floating-hearts">
-    <span style="left: 10%;">❤️</span>
-    <span style="left: 30%; animation-delay: 2s;">💖</span>
-    <span style="left: 50%; animation-delay: 4s;">❤️</span>
-    <span style="left: 70%; animation-delay: 6s;">💝</span>
-    <span style="left: 90%; animation-delay: 8s;">💗</span>
-  </div>
-
   <h1>Für meinen Papalein 💙</h1>
   <p>
     Lieber Papa,<br />
     ich möchte dir einfach mal sagen, wie sehr ich dich liebe. 🥹<br />
-    Du bist immer für mich da, hörst mir zu, hilfst mir weiter – egal was passiert.<br />
-    Ich bin so dankbar, dich an meiner Seite zu haben.<br /><br />
-    Du bist mein Held, mein Fels, mein bester Freund.<br />
+    Du bist immer für mich da – mein Held, mein Fels.<br />
     <span class="heart">❤️</span>
   </p>
 
-  <button class="hug-button" id="hugButton" onclick="showHugMagic(event)">Papa drücken ❤️</button>
-  <div class="hug-message" id="hugMessage">*drückt dich ganz fest* 🤗 Ich hab dich sooooo lieb!</div>
-  <div class="love-text" id="loveText">Ich liebe dich! 💗</div>
+  <button onclick="triggerVirtualHug()">Papa drücken ❤️</button>
+  <button onclick="showKeks()">Papa-Keks 🍪</button>
+  <button onclick="toggleMood()">Stimmung wechseln 🌈</button>
+  <button onclick="startFirework(event)">Herz-Feuerwerk 🎆</button>
+  <button onclick="toggleNightMode()">Nachtmodus 🌙</button>
 
-  <!-- Hintergrundmusik -->
-  <audio controls autoplay loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mp3">
-    Dein Browser unterstützt kein Audio-Element.
-  </audio>
+  <div class="love-text" id="keksText"></div>
+  <div class="virtual-hug" id="hugScreen">🤗💞</div>
+  
+  <div class="brief">Lieber Papa, du bist mein Lieblingsmensch. Ich danke dir für alles, was du für mich tust – du bist mein Held! 💌</div>
 
-  <!-- Klick-Soundeffekt -->
-  <audio id="clickSound">
-    <source src="https://assets.mixkit.co/sfx/preview/mixkit-small-pop-1113.mp3" type="audio/mpeg">
-  </audio>
+  <div class="giftbox" onclick="openGiftBox()">🎁</div>
+  <div class="love-text" id="giftMessage" style="display: none;">Du hast mein Herz ausgepackt! 💝</div>
 
-  <div class="footer">Mit ganz viel Liebe – von deinem Lieblingsmenschen 💕</div>
+  <div class="signature">Dein Schatz – [Dein Name] ✍️</div>
 
   <script>
-    function showHugMagic(e) {
-      const btn = document.getElementById("hugButton");
-      const msg = document.getElementById("hugMessage");
-      const text = document.getElementById("loveText");
-      const sound = document.getElementById("clickSound");
+    const sprueche = [
+      "Du bist der Beste!",
+      "Ich liebe deine Umarmungen!",
+      "Danke, dass du immer da bist!",
+      "Mit dir ist alles besser!",
+      "Mein Herz schlägt für dich, Papa! 💗"
+    ];
 
-      // Nachricht + Text anzeigen
-      msg.style.display = "block";
-      text.style.display = "block";
+    function showKeks() {
+      const keks = document.getElementById("keksText");
+      const zufall = sprueche[Math.floor(Math.random() * sprueche.length)];
+      keks.innerText = zufall;
+      keks.style.display = "block";
+    }
 
-      // Button animieren & Sound abspielen
-      btn.classList.add("animate");
-      sound.play();
+    function triggerVirtualHug() {
+      const hug = document.getElementById("hugScreen");
+      hug.style.display = "flex";
+      setTimeout(() => hug.style.display = "none", 1500);
+    }
 
-      // Herz-Explosion
+    let happy = true;
+    function toggleMood() {
+      document.body.style.background = happy
+        ? "linear-gradient(to bottom, #ffe0f0, #fff0f9)"
+        : "linear-gradient(to bottom, #c6f0ff, #f0f9ff)";
+      happy = !happy;
+    }
+
+    function startFirework(e) {
       for (let i = 0; i < 10; i++) {
         const heart = document.createElement("div");
-        heart.className = "explosion";
+        heart.className = "heart-firework";
         heart.innerText = "💖";
         document.body.appendChild(heart);
-
-        const x = e.clientX + (Math.random() - 0.5) * 100;
-        const y = e.clientY + (Math.random() - 0.5) * 100;
+        const x = e.clientX + (Math.random() - 0.5) * 200;
+        const y = e.clientY + (Math.random() - 0.5) * 200;
         heart.style.left = `${x}px`;
         heart.style.top = `${y}px`;
-
         setTimeout(() => heart.remove(), 1000);
       }
-
-      setTimeout(() => {
-        btn.classList.remove("animate");
-      }, 400);
     }
+
+    let night = false;
+    function toggleNightMode() {
+      document.body.style.background = night
+        ? "linear-gradient(to bottom, #c6f0ff, #f0f9ff)"
+        : "linear-gradient(to bottom, #0d1b2a, #1b263b)";
+      document.body.style.color = night ? "#333" : "#fff";
+      night = !night;
+    }
+
+    function openGiftBox() {
+      const gift = document.getElementById("giftMessage");
+      gift.style.display = "block";
+      gift.style.animation = "floatUp 1.5s ease forwards";
+    }
+
+    document.addEventListener("mousemove", function (e) {
+      const heart = document.createElement("div");
+      heart.className = "heart-trail";
+      heart.innerText = "💗";
+      document.body.appendChild(heart);
+      heart.style.left = `${e.clientX}px`;
+      heart.style.top = `${e.clientY}px`;
+      setTimeout(() => heart.remove(), 1000);
+    });
   </script>
 </body>
 </html>
