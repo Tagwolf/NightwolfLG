@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gute Nacht, Papa</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fdf6e3;
+      transition: background 2s, color 2s;
+      color: #333;
+      text-align: center;
+      font-family: 'Segoe UI', cursive;
+    }
+    #nightOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 2s;
+    }
+    .stars {
+      position: fixed;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 2s infinite alternate;
+    }
+    @keyframes twinkle {
+      from { opacity: 0.3; }
+      to { opacity: 1; }
+    }
+    #text {
+      margin-top: 20vh;
+      font-size: 2rem;
+    }
+    #btn {
+      margin-top: 2rem;
+      font-size: 1.5rem;
+      padding: 1rem 2rem;
+      border: none;
+      background: #ff7f7f;
+      color: white;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="nightOverlay"></div>
+  <div id="text">Drück den Knopf, wenn du schlafen willst, Papa 🌙</div>
+  <button id="btn" onclick="activateNight()">Gute Nacht, Papa</button>
+
+  <audio id="lullaby" src="assets/lullaby.mp3" preload="auto"></audio>
+
+  <script>
+    function activateNight() {
+      const overlay = document.getElementById("nightOverlay");
+      const audio = document.getElementById("lullaby");
+      overlay.style.opacity = 1;
+      document.body.style.color = "#fff";
+      document.getElementById("text").innerHTML = "Schlaf schön, Papa. Ich hab dich lieb 💙";
+      audio.volume = 0.4;
+      audio.play();
+      for (let i = 0; i < 60; i++) {
+        const star = document.createElement("div");
+        star.classList.add("stars");
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.left = `${Math.random() * 100}%`;
+        document.body.appendChild(star);
+      }
+    }
+  </script>
+</body>
+</html>
