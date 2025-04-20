@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Stimmungs-Wechsler</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    body {
+      transition: background-color 1s, color 1s;
+    }
+    #moodButton {
+      padding: 1rem 2rem;
+      margin-top: 2rem;
+      font-size: 1.5rem;
+      border: none;
+      background-color: #8ec5fc;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Für Papa ❤️</h1>
+    <nav>
+      <a href="index.html">Start</a>
+      <a href="time.html">⏳ Timer</a>
+      <a href="stern.html">⭐ Stern</a>
+      <a href="gutenacht.html">🌙 Nacht</a>
+      <a href="keks.html">🍪 Keks</a>
+      <a href="umarmung.html">🤗 Umarmung</a>
+      <a href="signatur.html">🖊️ Signatur</a>
+      <a href="stimmung.html">🌈 Stimmung</a>
+      <a href="feuerwerk.html">🎆 Feuerwerk</a>
+      <a href="nachtmodus.html">🌌 Himmel</a>
+      <a href="wetter.html">☁️ Wetter</a>
+      <a href="geschenk.html">🎁 Geschenk</a>
+      <a href="brief.html">📜 Brief</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Wähle deine Stimmung 😊</h2>
+    <button id="moodButton" onclick="changeMood()">Fröhlich!</button>
+  </main>
+
+  <footer>
+    <p>Mit ganz viel Liebe, dein Schatz 💖</p>
+  </footer>
+
+  <script>
+    function changeMood() {
+      document.body.style.backgroundColor = "#ff7f7f"; 
+      document.body.style.color = "#fff";
+      document.getElementById("moodButton").style.backgroundColor = "#ffcc00";
+      document.getElementById("moodButton").textContent = "Glücklich! 😄";
+    }
+  </script>
+</body>
+</html>
