@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Für meinen Papalein 💙</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #c6f0ff, #f0f9ff);
+      font-family: 'Open Sans', sans-serif;
+      text-align: center;
+      color: #333;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 3rem;
+      margin-top: 50px;
+      color: #1e90ff;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    p {
+      font-size: 1.2rem;
+      width: 80%;
+      max-width: 600px;
+      margin: 30px auto;
+      line-height: 1.6;
+      animation: slideUp 2s ease-in-out;
+    }
+
+    .heart {
+      font-size: 2rem;
+      color: red;
+      animation: heartbeat 1.5s infinite;
+    }
+
+    .footer {
+      margin-top: 100px;
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    .hug-button {
+      background-color: #ff69b4;
+      border: none;
+      color: white;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      margin-top: 30px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .hug-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+    }
+
+    .hug-button.animate {
+      animation: bounce 0.4s ease;
+    }
+
+    @keyframes bounce {
+      0%   { transform: scale(1); }
+      30%  { transform: scale(1.15); }
+      60%  { transform: scale(0.95); }
+      100% { transform: scale(1); }
+    }
+
+    .hug-message, .love-text {
+      display: none;
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #ff1493;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .love-text {
+      font-size: 2rem;
+      font-family: 'Pacifico', cursive;
+      color: #e60073;
+      animation: floatUp 1.2s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatUp {
+      from { opacity: 0; transform: translateY(20px) scale(0.9); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .floating-hearts span {
+      position: absolute;
+      display: block;
+      color: rgba(255, 0, 0, 0.4);
+      animation: float 10s linear infinite;
+      font-size: 2rem;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Herz-Explosion */
+    .explosion {
+      position: absolute;
+      pointer-events: none;
+      animation: explode 1s forwards;
+      font-size: 2rem;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(0); opacity: 1; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+
+    audio {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-hearts">
+    <span style="left: 10%;">❤️</span>
+    <span style="left: 30%; animation-delay: 2s;">💖</span>
+    <span style="left: 50%; animation-delay: 4s;">❤️</span>
+    <span style="left: 70%; animation-delay: 6s;">💝</span>
+    <span style="left: 90%; animation-delay: 8s;">💗</span>
+  </div>
+
+  <h1>Für meinen Papalein 💙</h1>
+  <p>
+    Lieber Papa,<br />
+    ich möchte dir einfach mal sagen, wie sehr ich dich liebe. 🥹<br />
+    Du bist immer für mich da, hörst mir zu, hilfst mir weiter – egal was passiert.<br />
+    Ich bin so dankbar, dich an meiner Seite zu haben.<br /><br />
+    Du bist mein Held, mein Fels, mein bester Freund.<br />
+    <span class="heart">❤️</span>
+  </p>
+
+  <button class="hug-button" id="hugButton" onclick="showHugMagic(event)">Papa drücken ❤️</button>
+  <div class="hug-message" id="hugMessage">*drückt dich ganz fest* 🤗 Ich hab dich sooooo lieb!</div>
+  <div class="love-text" id="loveText">Ich liebe dich! 💗</div>
+
+  <!-- Hintergrundmusik -->
+  <audio controls autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mp3">
+    Dein Browser unterstützt kein Audio-Element.
+  </audio>
+
+  <!-- Klick-Soundeffekt -->
+  <audio id="clickSound">
+    <source src="https://assets.mixkit.co/sfx/preview/mixkit-small-pop-1113.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="footer">Mit ganz viel Liebe – von deinem Lieblingsmenschen 💕</div>
+
+  <script>
+    function showHugMagic(e) {
+      const btn = document.getElementById("hugButton");
+      const msg = document.getElementById("hugMessage");
+      const text = document.getElementById("loveText");
+      const sound = document.getElementById("clickSound");
+
+      // Nachricht + Text anzeigen
+      msg.style.display = "block";
+      text.style.display = "block";
+
+      // Button animieren & Sound abspielen
+      btn.classList.add("animate");
+      sound.play();
+
+      // Herz-Explosion
+      for (let i = 0; i < 10; i++) {
+        const heart = document.createElement("div");
+        heart.className = "explosion";
+        heart.innerText = "💖";
+        document.body.appendChild(heart);
+
+        const x = e.clientX + (Math.random() - 0.5) * 100;
+        const y = e.clientY + (Math.random() - 0.5) * 100;
+        heart.style.left = `${x}px`;
+        heart.style.top = `${y}px`;
+
+        setTimeout(() => heart.remove(), 1000);
+      }
+
+      setTimeout(() => {
+        btn.classList.remove("animate");
+      }, 400);
+    }
+  </script>
+</body>
+</html>
