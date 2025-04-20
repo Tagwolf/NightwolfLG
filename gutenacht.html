@@ -3,15 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <title>Gute Nacht, Papa</title>
+  <link rel="stylesheet" href="assets/styles.css">
   <style>
     body {
-      margin: 0;
-      padding: 0;
       background: #fdf6e3;
       transition: background 2s, color 2s;
-      color: #333;
-      text-align: center;
-      font-family: 'Segoe UI', cursive;
     }
     #nightOverlay {
       position: fixed;
@@ -36,10 +32,6 @@
       from { opacity: 0.3; }
       to { opacity: 1; }
     }
-    #text {
-      margin-top: 20vh;
-      font-size: 2rem;
-    }
     #btn {
       margin-top: 2rem;
       font-size: 1.5rem;
@@ -53,21 +45,44 @@
   </style>
 </head>
 <body>
-  <div id="nightOverlay"></div>
-  <div id="text">Drück den Knopf, wenn du schlafen willst, Papa 🌙</div>
-  <button id="btn" onclick="activateNight()">Gute Nacht, Papa</button>
+  <header>
+    <h1>Für Papa ❤️</h1>
+    <nav>
+      <a href="index.html">Start</a>
+      <a href="time.html">⏳ Timer</a>
+      <a href="stern.html">⭐ Stern</a>
+      <a href="gutenacht.html">🌙 Nacht</a>
+      <a href="keks.html">🍪 Keks</a>
+      <a href="umarmung.html">🤗 Umarmung</a>
+      <a href="signatur.html">🖊️ Signatur</a>
+      <a href="stimmung.html">🌈 Stimmung</a>
+      <a href="feuerwerk.html">🎆 Feuerwerk</a>
+      <a href="nachtmodus.html">🌌 Himmel</a>
+      <a href="wetter.html">☁️ Wetter</a>
+      <a href="geschenk.html">🎁 Geschenk</a>
+      <a href="brief.html">📜 Brief</a>
+    </nav>
+  </header>
 
-  <audio id="lullaby" src="assets/lullaby.mp3" preload="auto"></audio>
+  <main>
+    <h2>Schlaf schön, Papa 🌙</h2>
+    <button id="btn" onclick="activateNight()">Gute Nacht</button>
+    <div id="nightOverlay"></div>
+    <audio id="lullaby" src="assets/lullaby.mp3" preload="auto"></audio>
+  </main>
+
+  <footer>
+    <p>Mit ganz viel Liebe, dein Schatz 💖</p>
+  </footer>
 
   <script>
     function activateNight() {
-      const overlay = document.getElementById("nightOverlay");
-      const audio = document.getElementById("lullaby");
-      overlay.style.opacity = 1;
+      document.getElementById("nightOverlay").style.opacity = 1;
       document.body.style.color = "#fff";
-      document.getElementById("text").innerHTML = "Schlaf schön, Papa. Ich hab dich lieb 💙";
-      audio.volume = 0.4;
-      audio.play();
+      document.querySelector("h2").textContent = "Gute Nacht, mein lieber Papa 💙";
+      document.getElementById("lullaby").volume = 0.4;
+      document.getElementById("lullaby").play();
+
       for (let i = 0; i < 60; i++) {
         const star = document.createElement("div");
         star.classList.add("stars");
