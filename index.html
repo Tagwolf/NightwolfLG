@@ -4,14 +4,13 @@
   <meta charset="UTF-8">
   <title>Für Papa – von TagWolf</title>
   <style>
-    body {
+    html, body {
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #ffd700, #ff8c00);
-      color: #fff;
       transition: background 1s, color 1s;
-      overflow: hidden;
+      overflow-x: hidden;
+      color: #fff;
     }
 
     header {
@@ -53,7 +52,7 @@
     .button {
       display: inline-block;
       padding: 12px 25px;
-      margin-top: 20px;
+      margin: 15px 10px;
       background-color: #fff;
       color: #ff4500;
       font-weight: bold;
@@ -65,12 +64,6 @@
 
     .button:hover {
       background-color: #f0e68c;
-    }
-
-    footer {
-      text-align: center;
-      margin: 40px 0 10px;
-      font-size: 1.2rem;
     }
 
     .ticker {
@@ -89,27 +82,23 @@
       100% { transform: translateX(-100%); }
     }
 
-    .timer-box {
+    .timer-box, .countdown-box {
       margin-top: 20px;
       font-size: 1.1rem;
       background: rgba(255, 255, 255, 0.1);
       padding: 10px;
       border-radius: 10px;
-      display: inline-block;
       animation: glow 3s ease-in-out infinite alternate;
     }
 
-    /* Dunkelmodus */
-    body.dark {
-      background: #121212;
-      color: #ccc;
+    .memory-box {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      background: rgba(255,255,255,0.1);
+      padding: 10px;
+      border-radius: 10px;
     }
 
-    body.dark .container {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    /* Herz Animation */
     .heart {
       position: absolute;
       pointer-events: none;
@@ -121,6 +110,15 @@
       0% { transform: translateY(0) scale(1); opacity: 1; }
       100% { transform: translateY(-150px) scale(1.5); opacity: 0; }
     }
+
+    body.dark {
+      background: #121212;
+      color: #ccc;
+    }
+
+    body.dark .container {
+      background: rgba(255, 255, 255, 0.1);
+    }
   </style>
 </head>
 <body>
@@ -130,37 +128,31 @@
   </header>
 
   <div class="container">
-    <div class="feature">
-      Papa, du bist unser Fels in der Brandung.
-    </div>
-    <div class="feature">
-      Dein Herz ist größer als das Universum.
-    </div>
-    <div class="feature">
-      Danke für deine Liebe, Stärke und Geduld.
-    </div>
+    <div class="feature">Papa, du bist unser Fels in der Brandung.</div>
+    <div class="feature">Dein Herz ist größer als das Universum.</div>
+    <div class="feature">Danke für deine Liebe, Stärke und Geduld.</div>
 
-    <div class="timer-box" id="supportTimer">
-      Du unterstützt mich seit genau …
-    </div>
+    <div class="timer-box" id="supportTimer"></div>
+    <div class="countdown-box" id="vatertagCountdown"></div>
+    <div class="memory-box" id="memoryBox">Klick unten für eine Erinnerung!</div>
 
-    <br><br>
+    <br>
     <a class="button" onclick="sayGoodNight()">Gute Nacht, Papa</a>
+    <a class="button" onclick="showMemory()">Ich erinnere mich an …</a>
   </div>
 
   <div class="ticker">
-    Danke, Papa! Du bist mein Held – heute, gestern und für immer! 
+    Danke, Papa! Du bist mein Held – heute, gestern und für immer!
   </div>
 
   <footer>
     ❤️ Wir haben dich lieb – TagWolf & Familie
   </footer>
 
-  <!-- Musik -->
   <audio id="music" src="https://www.bensound.com/bensound-music/bensound-sweet.mp3"></audio>
 
   <script>
-    // Herz bei Mausbewegung
+    // Herzen
     document.addEventListener('mousemove', function(e) {
       const heart = document.createElement('div');
       heart.textContent = '❤️';
@@ -171,35 +163,74 @@
       setTimeout(() => heart.remove(), 2000);
     });
 
-    // Gute Nacht Funktion
+    // Gute Nacht
     function sayGoodNight() {
       document.body.classList.toggle('dark');
-      const music = document.getElementById('music');
-      music.volume = 0.5;
-      music.play();
+      document.getElementById('music').play();
       const msg = new SpeechSynthesisUtterance("Gute Nacht Papa, ich hab dich doch lieb.");
       msg.lang = 'de-DE';
       speechSynthesis.speak(msg);
     }
 
-    // Timer: seit 15 Jahren (angenommen Startdatum 2009-04-21)
+    // Support Timer
     function updateTimer() {
       const start = new Date('2009-04-21T00:00:00');
       const now = new Date();
       const diff = now - start;
-
       const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
       const days = Math.floor(diff / (1000 * 60 * 60 * 24)) % 365;
       const hours = now.getHours();
       const minutes = now.getMinutes();
       const seconds = now.getSeconds();
-
       document.getElementById('supportTimer').innerText =
-        `Du unterstützt mich seit genau ${years} Jahren, ${days} Tagen, ${hours} Stunden, ${minutes} Minuten und ${seconds} Sekunden.`;
+        `Du unterstützt mich seit ${years} Jahren, ${days} Tagen, ${hours} Stunden, ${minutes} Minuten und ${seconds} Sekunden.`;
+    }
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    // Countdown bis Vatertag
+    function updateCountdown() {
+      const target = new Date('2025-05-29T00:00:00');
+      const now = new Date();
+      const diff = target - now;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+      const minutes = Math.floor(diff / (1000 * 60)) % 60;
+      const seconds = Math.floor(diff / 1000) % 60;
+      document.getElementById('vatertagCountdown').innerText =
+        `Noch ${days} Tage, ${hours} Stunden, ${minutes} Minuten und ${seconds} Sekunden bis Vatertag.`;
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Erinnerungen
+    const memories = [
+      "Erinnerst du dich an den Server-Crash?",
+      "Erinnerst du dich an unsere erste Begegnung?",
+      "Erinnerst du dich an Amres, wie er mich immer anscheißt, weil ich Scream anmach? 😄"
+    ];
+    function showMemory() {
+      const random = memories[Math.floor(Math.random() * memories.length)];
+      document.getElementById('memoryBox').innerText = random;
     }
 
-    setInterval(updateTimer, 1000);
-    updateTimer(); // sofort starten
+    // Farbverlauf je nach Tageszeit
+    function updateBackground() {
+      const hour = new Date().getHours();
+      let bg = "";
+      if (hour >= 6 && hour < 12) {
+        bg = "linear-gradient(135deg, #fceabb, #f8b500)";
+      } else if (hour >= 12 && hour < 18) {
+        bg = "linear-gradient(135deg, #ffdd00, #f7971e)";
+      } else if (hour >= 18 && hour < 22) {
+        bg = "linear-gradient(135deg, #ff7e5f, #feb47b)";
+      } else {
+        bg = "linear-gradient(135deg, #2c3e50, #000000)";
+      }
+      document.body.style.background = bg;
+    }
+    updateBackground();
   </script>
+
 </body>
 </html>
