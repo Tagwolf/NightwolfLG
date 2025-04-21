@@ -2,35 +2,204 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Für meinen lieben Papa</title>
-  <link rel="stylesheet" href="assets/styles.css">
+  <title>Für Papa – von TagWolf</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffd700, #ff8c00);
+      color: #fff;
+      transition: background 1s, color 1s;
+      overflow: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px 20px;
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 8px #000;
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #fff; }
+      to { text-shadow: 0 0 20px #ff4500, 0 0 30px #ff4500; }
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      text-align: center;
+    }
+
+    .feature {
+      margin: 20px 0;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border-left: 5px solid #fff;
+      transition: transform 0.3s ease;
+    }
+
+    .feature:hover {
+      transform: translateX(10px);
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 25px;
+      margin-top: 20px;
+      background-color: #fff;
+      color: #ff4500;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .button:hover {
+      background-color: #f0e68c;
+    }
+
+    footer {
+      text-align: center;
+      margin: 40px 0 10px;
+      font-size: 1.2rem;
+    }
+
+    .ticker {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+      border-top: 2px solid #fff;
+      padding: 10px;
+      font-size: 1.2rem;
+      animation: ticker 20s linear infinite;
+    }
+
+    @keyframes ticker {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .timer-box {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px;
+      border-radius: 10px;
+      display: inline-block;
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    /* Dunkelmodus */
+    body.dark {
+      background: #121212;
+      color: #ccc;
+    }
+
+    body.dark .container {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Herz Animation */
+    .heart {
+      position: absolute;
+      pointer-events: none;
+      animation: floatUp 2s ease-out forwards;
+      font-size: 20px;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-150px) scale(1.5); opacity: 0; }
+    }
+  </style>
 </head>
 <body>
+
   <header>
-    <h1>Für Papa ❤️</h1>
-    <nav>
-      <a href="index.html">Start</a>
-      <a href="time.html">⏳ Timer</a>
-      <a href="stern.html">⭐ Stern</a>
-      <a href="gutenacht.html">🌙 Nacht</a>
-      <a href="keks.html">🍪 Keks</a>
-      <a href="umarmung.html">🤗 Umarmung</a>
-      <a href="signatur.html">🖊️ Signatur</a>
-      <a href="stimmung.html">🌈 Stimmung</a>
-      <a href="feuerwerk.html">🎆 Feuerwerk</a>
-      <a href="nachtmodus.html">🌌 Himmel</a>
-      <a href="wetter.html">☁️ Wetter</a>
-      <a href="geschenk.html">🎁 Geschenk</a>
-      <a href="brief.html">📜 Brief</a>
-    </nav>
+    Für den besten Papa der Welt – von TagWolf
   </header>
-  <main>
-    <h2>Willkommen auf deiner Seite, Papa!</h2>
-    <p>Hier findest du kleine Überraschungen voller Liebe.</p>
-  </main>
+
+  <div class="container">
+    <div class="feature">
+      Papa, du bist unser Fels in der Brandung.
+    </div>
+    <div class="feature">
+      Dein Herz ist größer als das Universum.
+    </div>
+    <div class="feature">
+      Danke für deine Liebe, Stärke und Geduld.
+    </div>
+
+    <div class="timer-box" id="supportTimer">
+      Du unterstützt mich seit genau …
+    </div>
+
+    <br><br>
+    <a class="button" onclick="sayGoodNight()">Gute Nacht, Papa</a>
+  </div>
+
+  <div class="ticker">
+    Danke, Papa! Du bist mein Held – heute, gestern und für immer! 
+  </div>
+
   <footer>
-    <p>Mit ganz viel Liebe, dein Schatz 💖</p>
+    ❤️ Wir haben dich lieb – TagWolf & Familie
   </footer>
+
+  <!-- Musik -->
+  <audio id="music" src="https://www.bensound.com/bensound-music/bensound-sweet.mp3"></audio>
+
+  <script>
+    // Herz bei Mausbewegung
+    document.addEventListener('mousemove', function(e) {
+      const heart = document.createElement('div');
+      heart.textContent = '❤️';
+      heart.className = 'heart';
+      heart.style.left = (e.pageX - 10) + 'px';
+      heart.style.top = (e.pageY - 10) + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 2000);
+    });
+
+    // Gute Nacht Funktion
+    function sayGoodNight() {
+      document.body.classList.toggle('dark');
+      const music = document.getElementById('music');
+      music.volume = 0.5;
+      music.play();
+      const msg = new SpeechSynthesisUtterance("Gute Nacht Papa, ich hab dich doch lieb.");
+      msg.lang = 'de-DE';
+      speechSynthesis.speak(msg);
+    }
+
+    // Timer: seit 15 Jahren (angenommen Startdatum 2009-04-21)
+    function updateTimer() {
+      const start = new Date('2009-04-21T00:00:00');
+      const now = new Date();
+      const diff = now - start;
+
+      const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24)) % 365;
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const seconds = now.getSeconds();
+
+      document.getElementById('supportTimer').innerText =
+        `Du unterstützt mich seit genau ${years} Jahren, ${days} Tagen, ${hours} Stunden, ${minutes} Minuten und ${seconds} Sekunden.`;
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer(); // sofort starten
+  </script>
 </body>
 </html>
-
