@@ -1,107 +1,100 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <title>Papa, ich hab dich lieb – von TagWolf</title>
+  <meta charset="UTF-8">
+  <title>Für Papa – von TagWolf</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #fdfdfd, #e9f7ff);
-      overflow: hidden;
+      background: #f4f9ff; /* Sanftes Blau */
       color: #333;
-      transition: background 2s, color 2s;
+      transition: background 1s, color 1s;
+      overflow-x: hidden;
     }
 
-    h1 {
-      font-size: 3.5rem;
+    header {
       text-align: center;
-      margin-top: 80px;
-      animation: fadeIn 3s ease-in-out forwards;
-      color: #5a6b74;
+      padding: 80px 20px 40px;
+      font-size: 3rem;
+      font-weight: bold;
+      color: #6f7c87; /* Freundliches Grau-Blau */
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     }
 
-    .message {
-      position: absolute;
-      font-size: 1.8rem;
-      animation: float 10s infinite ease-in-out alternate;
-      white-space: nowrap;
-      opacity: 0.85;
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      text-align: center;
     }
 
-    .floating-area {
-      position: relative;
-      width: 100%;
-      height: 80vh;
-      overflow: hidden;
+    .feature {
+      margin: 30px 0;
+      padding: 25px;
+      background: #fefefe; /* Helles Creme */
+      border-left: 8px solid #a0b9c5; /* Sanftes Blau */
+      border-radius: 25px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      font-size: 1.4rem;
+      transition: transform 0.3s ease, box-shadow 0.3s;
+    }
+
+    .feature:hover {
+      transform: translateX(10px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
 
     .button {
-      display: block;
-      margin: 60px auto;
-      padding: 20px 40px;
-      background: #a0c4ff;
-      border: none;
-      border-radius: 50px;
-      font-size: 1.3rem;
+      display: inline-block;
+      padding: 18px 36px;
+      margin: 30px 20px;
+      background: #a0b9c5; /* Sanftes Blau */
       color: white;
+      font-weight: bold;
+      font-size: 1.3rem;
+      border: none;
+      border-radius: 15px;
       cursor: pointer;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      transition: transform 0.3s, background 0.3s;
+      transition: background 0.3s, transform 0.3s;
     }
 
     .button:hover {
+      background: #8cacc9;
       transform: scale(1.05);
-      background: #7ba8e8;
     }
 
-    @keyframes float {
-      0% { transform: translateY(0px) translateX(0); }
-      100% { transform: translateY(-100px) translateX(30px); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-50px); }
-      to { opacity: 1; transform: translateY(0); }
+    .info-box {
+      background: #eee;
+      padding: 20px;
+      margin-top: 30px;
+      border-radius: 15px;
+      font-size: 1.2rem;
     }
 
     .ticker {
-      position: fixed;
-      bottom: 20px;
-      width: 100%;
-      text-align: center;
-      font-size: 1.4rem;
-      color: #888;
-      animation: fadeIn 3s ease;
+      margin-top: 50px;
+      background: #a0b9c5; /* Sanftes Blau */
+      color: white;
+      padding: 15px;
+      font-size: 1.5rem;
+      animation: ticker 20s linear infinite;
+      white-space: nowrap;
+      overflow: hidden;
     }
 
-    /* Gute Nacht Modus */
-    body.dark {
-      background: radial-gradient(circle, #0d0d1f, #000000);
-      color: #e0e0e0;
-    }
-
-    .star {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      background: white;
-      border-radius: 50%;
-      animation: twinkle 2s infinite alternate ease-in-out;
-      opacity: 0.5;
-    }
-
-    @keyframes twinkle {
-      0% { opacity: 0.2; }
-      100% { opacity: 1; }
+    @keyframes ticker {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
     }
 
     .heart {
       position: absolute;
       pointer-events: none;
       animation: floatUp 2s ease-out forwards;
-      font-size: 28px;
+      font-size: 30px;
     }
 
     @keyframes floatUp {
@@ -109,22 +102,76 @@
       100% { transform: translateY(-150px) scale(1.5); opacity: 0; }
     }
 
+    /* Darkmode mit Sternenhimmel */
+    body.dark {
+      background: #0a0a0a;
+      color: #e0e0e0;
+    }
+
+    body.dark .container {
+      background: transparent;
+    }
+
+    body.dark .feature {
+      background: rgba(255,255,255,0.1);
+      border-left: 8px solid #ccc;
+    }
+
+    body.dark .info-box {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .stars {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      background: transparent;
+    }
+
+    .star {
+      position: absolute;
+      width: 4px; height: 4px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 2s infinite ease-in-out alternate;
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.2; }
+      to { opacity: 1; }
+    }
   </style>
 </head>
 <body>
 
-  <h1>Für dich, Papa</h1>
+  <header>
+    Für den besten Papa – von TagWolf
+  </header>
 
-  <div class="floating-area" id="floatingArea"></div>
+  <div class="container">
+    <div class="feature">Papa, du bist der Grund, warum ich nie aufgebe.</div>
+    <div class="feature">Deine Stärke hat mir 15 Jahre Rückhalt gegeben.</div>
+    <div class="feature">Danke für jedes Gespräch, jeden Rat, jeden Witz.</div>
 
-  <button class="button" onclick="sayGoodNight()">Gute Nacht, Papa</button>
+    <div class="info-box" id="supportTimer"></div>
+    <div class="info-box" id="vatertagCountdown"></div>
+    <div class="info-box" id="memoryBox">Klick unten für eine Erinnerung!</div>
 
-  <div class="ticker" id="tickerText">Seit 15 Jahren bist du mein Rückhalt. Ich liebe dich, Papa.</div>
+    <button class="button" onclick="sayGoodNight()">Gute Nacht, Papa</button>
+    <button class="button" onclick="showMemory()">Ich erinnere mich an …</button>
+  </div>
+
+  <div class="ticker">
+    Papa – du bist mein Held. Ich liebe dich, und das bleibt für immer so.
+  </div>
 
   <audio id="music" src="https://www.bensound.com/bensound-music/bensound-sweet.mp3"></audio>
+  <div class="stars" id="stars"></div>
 
   <script>
-    // Herzen bei Maus
+    // Herz bei Maus
     document.addEventListener('mousemove', function(e) {
       const heart = document.createElement('div');
       heart.textContent = '❤️';
@@ -135,33 +182,47 @@
       setTimeout(() => heart.remove(), 2000);
     });
 
-    // Schwebende Nachrichten
-    const messages = [
-      "Danke, dass du immer für mich da bist.",
+    // Erinnerungen
+    const memories = [
       "Erinnerst du dich an den Server-Crash?",
-      "Erinnerst du dich an unsere erste Begegnung?",
-      "Wie Amres mich anscheißt wegen Scream? Haha!",
-      "15 Jahre Liebe, Vertrauen und Stärke.",
-      "Ich bin stolz, dein Sohn zu sein.",
-      "Du bist mein Superheld, Papa.",
-      "Ich hab dich doch lieb."
+      "Unsere erste Begegnung",
+      "Wie Amres mich immer anscheißt, weil ich Scream anmach? 😄"
     ];
-
-    const area = document.getElementById('floatingArea');
-
-    function createFloatingMessage() {
-      const msg = document.createElement('div');
-      msg.className = 'message';
-      msg.textContent = messages[Math.floor(Math.random() * messages.length)];
-      msg.style.top = Math.random() * 70 + '%';
-      msg.style.left = Math.random() * 90 + '%';
-      msg.style.animationDuration = (8 + Math.random() * 8) + 's';
-      area.appendChild(msg);
-      setTimeout(() => msg.remove(), 15000);
+    function showMemory() {
+      const random = memories[Math.floor(Math.random() * memories.length)];
+      document.getElementById('memoryBox').innerText = random;
     }
 
-    setInterval(createFloatingMessage, 3000);
-    for (let i = 0; i < 5; i++) createFloatingMessage();
+    // Timer
+    function updateTimer() {
+      const start = new Date('2009-04-21T00:00:00');
+      const now = new Date();
+      const diff = now - start;
+      const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24)) % 365;
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const seconds = now.getSeconds();
+      document.getElementById('supportTimer').innerText =
+        `Du unterstützt mich seit ${years} Jahren, ${days} Tagen, ${hours} Std, ${minutes} Min, ${seconds} Sek.`;
+    }
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    // Countdown bis Vatertag 2025
+    function updateCountdown() {
+      const target = new Date('2025-05-29T00:00:00');
+      const now = new Date();
+      const diff = target - now;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+      const minutes = Math.floor(diff / (1000 * 60)) % 60;
+      const seconds = Math.floor(diff / 1000) % 60;
+      document.getElementById('vatertagCountdown').innerText =
+        `Noch ${days} Tage, ${hours} Std, ${minutes} Min, ${seconds} Sek bis Vatertag.`;
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
 
     // Gute Nacht Funktion
     function sayGoodNight() {
@@ -175,13 +236,15 @@
 
     // Sterne erzeugen
     function createStars() {
-      for (let i = 0; i < 100; i++) {
+      const starsContainer = document.getElementById('stars');
+      starsContainer.innerHTML = '';
+      for (let i = 0; i < 150; i++) {
         const star = document.createElement('div');
         star.className = 'star';
-        star.style.top = Math.random() * 100 + '%';
         star.style.left = Math.random() * 100 + '%';
-        star.style.animationDuration = (2 + Math.random() * 3) + 's';
-        document.body.appendChild(star);
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDuration = (1 + Math.random() * 3) + 's';
+        starsContainer.appendChild(star);
       }
     }
   </script>
