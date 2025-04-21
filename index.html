@@ -10,8 +10,8 @@
       overflow: hidden;
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(to bottom, #ffffff, #fceff9);
-      transition: all 1s ease;
       color: #333;
+      transition: background 1s ease;
     }
 
     h1 {
@@ -123,6 +123,41 @@
       }
     }
 
+    /* Effekte für Herzen */
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      color: #ff4d6d;
+      animation: heart-move 1s ease-out forwards;
+    }
+
+    @keyframes heart-move {
+      0% {
+        transform: scale(1) translate(0, 0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1.5) translate(-100px, -100px);
+        opacity: 0;
+      }
+    }
+
+    /* Light-Lights */
+    .heart-line-light {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 200%;
+      height: 1px;
+      background: #ff4d6d;
+      animation: light-line 1.5s infinite;
+    }
+
+    @keyframes light-line {
+      0% { width: 0%; }
+      100% { width: 200%; }
+    }
+
   </style>
 </head>
 <body>
@@ -137,12 +172,14 @@
 
   <button class="button" onclick="sayGoodNight()">Gute Nacht, Papa</button>
 
+  <div id="messages"></div>
+  
   <audio id="music" src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3"></audio>
 
   <script>
     // Zähler seit Geburt
     function updateDays() {
-      const birth = new Date("2009-27-07"); // <- hier dein echtes Datum eingeben
+      const birth = new Date("2010-01-01"); // <- hier dein echtes Datum eingeben
       const now = new Date();
       const days = Math.floor((now - birth) / (1000 * 60 * 60 * 24));
       document.getElementById("ageCounter").textContent = `Du bist seit ${days} Tagen für mich da.`;
@@ -179,6 +216,33 @@
       document.body.appendChild(star);
       setTimeout(() => star.remove(), 2000);
     }
+
+    // Herz-Animation mit Mausbewegung
+    document.addEventListener("mousemove", (e) => {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = `${e.pageX}px`;
+      heart.style.top = `${e.pageY}px`;
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 1000); // Nach einer Sekunde löschen
+    });
+
+    // "Papa-Gedanken" Zufallsgenerator
+    const thoughts = [
+      "Weißt du noch, als du mir das Fahrrad repariert hast?",
+      "Danke, dass du immer für mich da bist.",
+      "Ich kann mich an unseren ersten Urlaub nicht erinnern, aber du hast mir alles erzählt.",
+      "Ich schätze dich mehr als Worte sagen können!",
+    ];
+
+    setInterval(() => {
+      const randomMessage = thoughts[Math.floor(Math.random() * thoughts.length)];
+      const messageDiv = document.createElement("p");
+      messageDiv.textContent = randomMessage;
+      document.getElementById("messages").appendChild(messageDiv);
+      setTimeout(() => messageDiv.remove(), 4000);
+    }, 5000); // Alle 5 Sekunden neue Nachricht
   </script>
 
 </body>
