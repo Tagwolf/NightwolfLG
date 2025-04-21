@@ -2,187 +2,182 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <title>Papa, ich hab dich lieb – von TagWolf</title>
+  <title>Papa, du bist mein Herz</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #fdfdfd, #e9f7ff);
       overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #ffffff, #fceff9);
+      transition: all 1s ease;
       color: #333;
-      transition: background 2s, color 2s;
     }
 
     h1 {
-      font-size: 3.5rem;
       text-align: center;
-      margin-top: 80px;
-      animation: fadeIn 3s ease-in-out forwards;
-      color: #5a6b74;
+      margin-top: 30px;
+      font-size: 3rem;
+      color: #d6336c;
+      animation: pulse 3s infinite ease-in-out;
     }
 
-    .message {
-      position: absolute;
-      font-size: 1.8rem;
-      animation: float 10s infinite ease-in-out alternate;
-      white-space: nowrap;
-      opacity: 0.85;
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
     }
 
-    .floating-area {
-      position: relative;
+    .counter {
+      text-align: center;
+      font-size: 1.3rem;
+      margin-top: 10px;
+      color: #495057;
+    }
+
+    .heart-beat {
       width: 100%;
-      height: 80vh;
+      height: 100px;
+      margin-top: 50px;
+      position: relative;
       overflow: hidden;
     }
 
+    .heart-line {
+      position: absolute;
+      width: 200%;
+      height: 100%;
+      background: none;
+      border-left: 2px solid #ff4d6d;
+      animation: heartbeat 2s infinite linear;
+    }
+
+    @keyframes heartbeat {
+      0% {
+        clip-path: polygon(0% 50%, 5% 50%, 7% 10%, 9% 90%, 11% 50%, 100% 50%);
+      }
+      100% {
+        clip-path: polygon(0% 50%, 5% 50%, 7% 10%, 9% 90%, 11% 50%, 100% 50%);
+        transform: translateX(-100%);
+      }
+    }
+
     .button {
-      display: block;
-      margin: 60px auto;
-      padding: 20px 40px;
-      background: #a0c4ff;
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 15px 30px;
+      font-size: 1.2rem;
       border: none;
-      border-radius: 50px;
-      font-size: 1.3rem;
+      border-radius: 30px;
+      background: #a2d2ff;
       color: white;
       cursor: pointer;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      transition: transform 0.3s, background 0.3s;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      transition: all 0.3s;
     }
 
     .button:hover {
-      transform: scale(1.05);
-      background: #7ba8e8;
+      background: #74c0fc;
+      transform: scale(1.05) translateX(-50%);
     }
 
-    @keyframes float {
-      0% { transform: translateY(0px) translateX(0); }
-      100% { transform: translateY(-100px) translateX(30px); }
+    .dark {
+      background: radial-gradient(#000014, #000000);
+      color: #eee;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-50px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .ticker {
-      position: fixed;
-      bottom: 20px;
-      width: 100%;
-      text-align: center;
-      font-size: 1.4rem;
-      color: #888;
-      animation: fadeIn 3s ease;
-    }
-
-    /* Gute Nacht Modus */
-    body.dark {
-      background: radial-gradient(circle, #0d0d1f, #000000);
-      color: #e0e0e0;
-    }
-
-    .star {
+    .glow-light {
       position: absolute;
-      width: 3px;
-      height: 3px;
-      background: white;
+      width: 10px;
+      height: 10px;
+      background: #ffcad4;
       border-radius: 50%;
-      animation: twinkle 2s infinite alternate ease-in-out;
-      opacity: 0.5;
+      opacity: 0.6;
+      animation: flicker 2s infinite ease-in-out;
     }
 
-    @keyframes twinkle {
-      0% { opacity: 0.2; }
-      100% { opacity: 1; }
+    @keyframes flicker {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
     }
 
-    .heart {
+    .starfall {
       position: absolute;
-      pointer-events: none;
-      animation: floatUp 2s ease-out forwards;
-      font-size: 28px;
+      width: 2px;
+      height: 80px;
+      background: white;
+      animation: fall 2s linear forwards;
     }
 
-    @keyframes floatUp {
-      0% { transform: translateY(0) scale(1); opacity: 1; }
-      100% { transform: translateY(-150px) scale(1.5); opacity: 0; }
+    @keyframes fall {
+      0% {
+        top: -80px;
+        left: calc(100% * var(--rand));
+        opacity: 1;
+      }
+      100% {
+        top: 100%;
+        left: calc(100% * var(--rand) + 100px);
+        opacity: 0;
+      }
     }
 
   </style>
 </head>
 <body>
 
-  <h1>Für dich, Papa</h1>
+  <h1>Du bist mein Herz, Papa</h1>
 
-  <div class="floating-area" id="floatingArea"></div>
+  <div class="counter" id="ageCounter">Berechne...</div>
+
+  <div class="heart-beat">
+    <div class="heart-line"></div>
+  </div>
 
   <button class="button" onclick="sayGoodNight()">Gute Nacht, Papa</button>
 
-  <div class="ticker" id="tickerText">Seit 15 Jahren bist du mein Rückhalt. Ich liebe dich, Papa.</div>
-
-  <audio id="music" src="https://www.bensound.com/bensound-music/bensound-sweet.mp3"></audio>
+  <audio id="music" src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3"></audio>
 
   <script>
-    // Herzen bei Maus
-    document.addEventListener('mousemove', function(e) {
-      const heart = document.createElement('div');
-      heart.textContent = '❤️';
-      heart.className = 'heart';
-      heart.style.left = (e.pageX - 15) + 'px';
-      heart.style.top = (e.pageY - 15) + 'px';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 2000);
-    });
-
-    // Schwebende Nachrichten
-    const messages = [
-      "Danke, dass du immer für mich da bist.",
-      "Erinnerst du dich an den Server-Crash?",
-      "Erinnerst du dich an unsere erste Begegnung?",
-      "Wie Amres mich anscheißt wegen Scream? Haha!",
-      "15 Jahre Liebe, Vertrauen und Stärke.",
-      "Ich bin stolz, dein Sohn zu sein.",
-      "Du bist mein Superheld, Papa.",
-      "Ich hab dich doch lieb."
-    ];
-
-    const area = document.getElementById('floatingArea');
-
-    function createFloatingMessage() {
-      const msg = document.createElement('div');
-      msg.className = 'message';
-      msg.textContent = messages[Math.floor(Math.random() * messages.length)];
-      msg.style.top = Math.random() * 70 + '%';
-      msg.style.left = Math.random() * 90 + '%';
-      msg.style.animationDuration = (8 + Math.random() * 8) + 's';
-      area.appendChild(msg);
-      setTimeout(() => msg.remove(), 15000);
+    // Zähler seit Geburt
+    function updateDays() {
+      const birth = new Date("2009-27-07"); // <- hier dein echtes Datum eingeben
+      const now = new Date();
+      const days = Math.floor((now - birth) / (1000 * 60 * 60 * 24));
+      document.getElementById("ageCounter").textContent = `Du bist seit ${days} Tagen für mich da.`;
     }
 
-    setInterval(createFloatingMessage, 3000);
-    for (let i = 0; i < 5; i++) createFloatingMessage();
+    updateDays();
 
-    // Gute Nacht Funktion
+    // Gute Nacht Modus mit Sternschnuppe + Lichtchen
     function sayGoodNight() {
-      document.body.classList.toggle('dark');
-      document.getElementById('music').play();
-      const msg = new SpeechSynthesisUtterance("Gute Nacht Papa, ich hab dich doch lieb.");
-      msg.lang = 'de-DE';
-      speechSynthesis.speak(msg);
-      createStars();
-    }
+      document.body.classList.toggle("dark");
 
-    // Sterne erzeugen
-    function createStars() {
-      for (let i = 0; i < 100; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        star.style.top = Math.random() * 100 + '%';
-        star.style.left = Math.random() * 100 + '%';
-        star.style.animationDuration = (2 + Math.random() * 3) + 's';
-        document.body.appendChild(star);
+      // Musik abspielen
+      document.getElementById("music").play();
+
+      // Sprachausgabe
+      const msg = new SpeechSynthesisUtterance("Gute Nacht Papa. Ich hab dich lieb.");
+      msg.lang = "de-DE";
+      speechSynthesis.speak(msg);
+
+      // Glühlichtchen
+      for (let i = 0; i < 80; i++) {
+        const glow = document.createElement("div");
+        glow.className = "glow-light";
+        glow.style.top = Math.random() * 100 + "%";
+        glow.style.left = Math.random() * 100 + "%";
+        glow.style.animationDuration = (1 + Math.random() * 3) + "s";
+        document.body.appendChild(glow);
       }
+
+      // Sternschnuppe
+      const star = document.createElement("div");
+      star.className = "starfall";
+      star.style.setProperty('--rand', Math.random());
+      document.body.appendChild(star);
+      setTimeout(() => star.remove(), 2000);
     }
   </script>
 
